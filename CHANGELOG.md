@@ -1,3 +1,26 @@
+4.2.0 - 2025-12-29
+=======================
+* Add dependencies for benchmark and logger which are moving out of stdlib.
+* Pull ActiveJob adapter from rails into DJ for future rails release.
+* Add Ruby 4.0 and Rails 8.1 to test matrix.
+
+4.1.13 - 2024-11-08
+=======================
+* Enable Rails 8
+
+4.1.12 - 2024-08-14
+=======================
+* Add missing require for extract_options
+* Fix rails 7.2 ActiveSupport::ProxyObject deprecation
+* Multiple contributors on current and legacy test suite improvements
+
+4.1.12.rc1 - 2024-08-13
+=======================
+* Validating trusted publishing release
+* Add missing require for extract_options
+* Fix rails 7.2 ActiveSupport::ProxyObject deprecation
+* Multiple contributors on current and legacy test suite improvements
+
 4.1.11 - 2022-09-28
 ===================
 * Fix missing require for Rails 7.0.3+
