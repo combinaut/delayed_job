@@ -1,40 +1,35 @@
-AbcSize:
+inherit_from: .rubocop_todo.yml
+
+Metrics/AbcSize:
   Enabled: false
 
 # Enforce outdenting of access modifiers (i.e. public, private, protected)
-AccessModifierIndentation:
+Layout/AccessModifierIndentation:
   EnforcedStyle: outdent
 
-Alias:
+Style/Alias:
   EnforcedStyle: prefer_alias_method
 
 AllCops:
-  Include:
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'delayed_job.gemspec'
   TargetRubyVersion: 2.1
 
-RedundantBlockCall:
-  Enabled: false
-
-BlockLength:
+Metrics/BlockLength:
   Enabled: false
 
 # Avoid more than `Max` levels of nesting.
-BlockNesting:
+Metrics/BlockNesting:
   Max: 2
 
 # Indentation of when/else
-CaseIndentation:
+Layout/CaseIndentation:
   EnforcedStyle: end
   IndentOneStep: false
 
-ClassLength:
+Metrics/ClassLength:
   Max: 100
 
 # Align with the style guide.
-CollectionMethods:
+Style/CollectionMethods:
   PreferredMethods:
     collect:  'map'
     collect!: 'map!'
@@ -43,60 +38,60 @@ CollectionMethods:
     find_all: 'select'
 
 # Disable documentation checking until a class needs to be documented once
-Documentation:
+Style/Documentation:
   Enabled: false
 
 # Allow dots at the end of lines
-DotPosition:
+Layout/DotPosition:
   EnforcedStyle: trailing
 
-DoubleNegation:
+Style/DoubleNegation:
   Enabled: false
 
 # Detects any duplication as issue including our conditional requires
-DuplicatedGem:
+Bundler/DuplicatedGem:
   Enabled: false
 
-EmptyLinesAroundAccessModifier:
+Layout/EmptyLinesAroundAccessModifier:
   Enabled: true
 
 # Don't require magic comment at the top of every file
-Encoding:
+Style/Encoding:
   Enabled: false
 
 # Align ends correctly
-EndAlignment:
+Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
 
 Style/FrozenStringLiteralComment:
   Enabled: false
 
 # Enforce Ruby 1.8-compatible hash syntax
-HashSyntax:
+Style/HashSyntax:
   EnforcedStyle: hash_rockets
 
-Lambda:
+Style/Lambda:
   Enabled: false
 
-LineLength:
+Layout/LineLength:
   Enabled: false
 
-MethodLength:
+Metrics/MethodLength:
   CountComments: false
   Max: 53
 
-MultilineOperationIndentation:
+Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 
 Style/NumericPredicate:
   Enabled: false
 
 # Avoid long parameter lists
-ParameterLists:
+Metrics/ParameterLists:
   Max: 4
   CountKeywordArgs: true
 
-PercentLiteralDelimiters:
+Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     '%':  ()
     '%i': ()
@@ -108,39 +103,42 @@ PercentLiteralDelimiters:
     '%W': '[]'
     '%x': ()
 
-RaiseArgs:
+Style/RaiseArgs:
   EnforcedStyle: exploded
 
-RegexpLiteral:
+Style/RegexpLiteral:
   Enabled: false
 
-RescueModifier:
+Style/RescueModifier:
   Enabled: false
 
 Style/SafeNavigation:
   Enabled: false
 
-SignalException:
+Style/SignalException:
   EnforcedStyle: only_raise
 
 # No spaces inside hash literals
-SpaceInsideHashLiteralBraces:
+Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
 Style/SymbolArray:
   Enabled: false
 
-SymbolProc:
+Style/SymbolProc:
   Enabled: false
 
-TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
   Enabled: false
 
-TrailingCommaInArguments:
+Style/TrailingCommaInHashLiteral:
   Enabled: false
 
-YAMLLoad:
+Style/TrailingCommaInArguments:
   Enabled: false
 
-ZeroLengthPredicate:
+Security/YAMLLoad:
+  Enabled: false
+
+Style/ZeroLengthPredicate:
   Enabled: false
