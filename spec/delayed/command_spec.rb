@@ -196,9 +196,9 @@ describe Delayed::Command do
       expect(FileUtils).to receive(:mkdir_p).with('./tmp/pids').once
 
       [
-        ['delayed_job.0', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[fast], :exclude_specified_queues => false}],
-        ['delayed_job.1', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[lage slow buggy], :exclude_specified_queues => true}],
-        ['delayed_job.2', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[lage slow buggy], :exclude_specified_queues => true}]
+        ['delayed_job.0', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[fast]}],
+        ['delayed_job.1', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[!lage slow buggy]}],
+        ['delayed_job.2', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[!lage slow buggy]}]
       ].each do |args|
         expect(command).to receive(:run_process).with(*args).once
       end
