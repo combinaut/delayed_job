@@ -3,15 +3,7 @@ source 'https://rubygems.org'
 gem 'rake'
 
 platforms :ruby do
-  # Rails 5.1 is the first to work with sqlite 1.4
-  # Rails 6 now requires sqlite 1.4
-  if ENV['RAILS_VERSION'] && ENV['RAILS_VERSION'] < '5.1'
-    gem 'sqlite3', '< 1.4'
-  elsif ENV['RAILS_VERSION'] && ENV['RAILS_VERSION'] < '7.2'
-    gem 'sqlite3', '~> 1.4'
-  else
-    gem 'sqlite3'
-  end
+  gem 'sqlite3', '>= 2.10.2'
 end
 
 platforms :jruby do
@@ -54,12 +46,6 @@ group :test do
   elsif ENV['RAILS_VERSION']
     gem 'actionmailer', "~> #{ENV['RAILS_VERSION']}"
     gem 'activerecord', "~> #{ENV['RAILS_VERSION']}"
-
-    if ENV['RAILS_VERSION'] < '5.1'
-      gem 'loofah', '2.3.1'
-      gem 'nokogiri', '< 1.11.0'
-      gem 'rails-html-sanitizer', '< 1.4.0'
-    end
   else
     gem 'actionmailer', ['>= 3.0', '< 9.0']
     gem 'activerecord', ['>= 3.0', '< 9.0']
