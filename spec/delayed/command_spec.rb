@@ -191,19 +191,38 @@ describe Delayed::Command do
       command.daemonize
     end
 
-    it 'should set queue exclusion to true if a queue starts with a ! and --exclude_specified_queues has not been specified' do
+    it 'should pass !-prefixed pool queues to run_process unchanged without --exclude-specified-queues' do
       command = Delayed::Command.new(['--pool=fast:1', '--pool=!lage,slow,buggy:2'])
       expect(FileUtils).to receive(:mkdir_p).with('./tmp/pids').once
 
       [
-        ['delayed_job.0', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[fast], :exclude_specified_queues => false}],
-        ['delayed_job.1', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[lage slow buggy], :exclude_specified_queues => true}],
-        ['delayed_job.2', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[lage slow buggy], :exclude_specified_queues => true}]
+        ['delayed_job.0', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[fast]}],
+        ['delayed_job.1', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[!lage slow buggy]}],
+        ['delayed_job.2', {:quiet => true, :pid_dir => './tmp/pids', :log_dir => './log', :queues => %w[!lage slow buggy]}]
       ].each do |args|
         expect(command).to receive(:run_process).with(*args).once
       end
 
       command.daemonize
+    end
+  end
+
+  describe 'normalizing worker options' do
+    let(:command) { Delayed::Command.new([]) }
+
+    it 'should strip a leading ! from queues and set queue exclusion' do
+      options = command.send(:normalize_worker_options, :queues => %w[!lage slow buggy])
+      expect(options).to eq(:queues => %w[lage slow buggy], :exclude_specified_queues => true)
+    end
+
+    it 'should not set queue exclusion without a leading !' do
+      options = command.send(:normalize_worker_options, :queues => %w[lage slow])
+      expect(options).to eq(:queues => %w[lage slow], :exclude_specified_queues => false)
+    end
+
+    it 'should keep ! in queue names when queue exclusion is already specified' do
+      options = command.send(:normalize_worker_options, :queues => %w[!lage], :exclude_specified_queues => true)
+      expect(options).to eq(:queues => %w[!lage], :exclude_specified_queues => true)
     end
   end
 end
