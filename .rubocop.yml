@@ -48,10 +48,6 @@ Layout/DotPosition:
 Style/DoubleNegation:
   Enabled: false
 
-# Detects any duplication as issue including our conditional requires
-Bundler/DuplicatedGem:
-  Enabled: false
-
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: true
 

@@ -39,12 +39,7 @@ group :test do
   gem 'net-smtp' if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.1.0')
   gem 'rspec', '>= 3'
   gem 'simplecov', :require => false
-  if /\A2.[12]/ =~ RUBY_VERSION
-    # 0.8.0 doesn't work with simplecov < 0.18.0 and older ruby can't run 0.18.0
-    gem 'simplecov-lcov', '< 0.8.0', :require => false
-  else
-    gem 'simplecov-lcov', :require => false
-  end
+  gem 'simplecov-lcov', :require => false
   if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.3.0')
     # New dependencies with a deprecation notice in Ruby 3.3 and required in Ruby 3.4
     # Probably won't get released in rails 7.0
@@ -52,8 +47,6 @@ group :test do
     gem 'bigdecimal'
     gem 'mutex_m'
     gem 'ostruct'
-  elsif Gem::Version.new(RUBY_VERSION) <= Gem::Version.new('2.2.100')
-    gem 'logger', '< 1.3'
   end
   if ENV['RAILS_VERSION'].nil? || ENV['RAILS_VERSION'] >= '6.0.0'
     gem 'zeitwerk', :require => false

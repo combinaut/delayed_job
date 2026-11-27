@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     name: Test (Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails_version }})
-    runs-on: ubuntu-${{ matrix.ubuntu }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -19,7 +19,6 @@ jobs:
           - '8.0.0'
           - '8.1.0'
           - 'edge'
-        ubuntu: [latest]
         exclude:
           - ruby: '3.2'
             rails_version: 'edge'
