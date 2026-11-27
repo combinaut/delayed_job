@@ -62,7 +62,7 @@ group :test do
 end
 
 group :rubocop do
-  gem 'rubocop', '>= 0.25', '< 0.49'
+  gem 'rubocop', '>= 1.0'
 end
 
 gemspec
